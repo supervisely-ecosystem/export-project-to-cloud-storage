@@ -1,0 +1,15 @@
+<sly-card title="Connect to the cloud storage"
+          subtitle="Choose cloud service provider and bucket name">
+    <div class="fflex">
+        <sly-field title="Provider" style="margin: 0 10px 0 0;">
+            <el-select v-model="state.provider" placeholder="Select cloud provider">
+                <el-option key="google" label="google cloud storage" value="google"></el-option>
+                <el-option key="amazon" label="amazon s3" value="s3"></el-option>
+                <el-option key="azure" label="azure storage" value="azure"></el-option>
+            </el-select>
+        </sly-field>
+        <sly-field title="Bucket name" style="flex: 1; margin: 0 10px 0 0;">
+            <el-input v-model="state.bucketName" class="mr10"></el-input>
+        </sly-field>
+    </div>
+</sly-card>
