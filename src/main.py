@@ -6,8 +6,10 @@ import supervisely as sly
 @g.app.callback("export-project-to-cloud-storage")
 @sly.timeit
 def export_project_to_cloud_storage(api: sly.Api, task_id, context, state, app_logger):
-    project_dir = os.path.join(g.STORAGE_DIR, "sly_project")
+    project_dir = os.path.join(g.STORAGE_DIR, g.PROJECT_NAME)
     sly.download_project(api=api, project_id=g.PROJECT_ID, dest_dir=project_dir, dataset_ids=None, log_progress=True)
+
+    # api.remote_storage.download_path()
 
     g.app.stop()
 

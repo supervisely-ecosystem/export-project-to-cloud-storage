@@ -25,6 +25,9 @@ TEAM_ID = int(os.environ.get("context.teamId"))
 WORKSPACE_ID = int(os.environ.get("context.workspaceId"))
 PROJECT_ID = int(os.environ.get("modal.state.slyProjectId"))
 
+PROJECT = api.project.get_info_by_id(PROJECT_ID)
+PROJECT_NAME = PROJECT.name
+
 PROVIDER = os.environ.get("modal.state.provider")
 BUCKET_NAME = os.environ.get("modal.state.bucketName")
 
