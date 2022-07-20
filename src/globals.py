@@ -19,7 +19,6 @@ logger.info(f'PYTHONPATH={os.environ.get("PYTHONPATH", "")}')
 # load_dotenv(os.path.join(app_root_directory, "debug.env"))
 
 app = FastAPI()
-
 sly_app = create()
 api = sly.Api.from_env()
 
