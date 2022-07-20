@@ -5,7 +5,6 @@ from pathlib import Path
 import supervisely as sly
 from fastapi import FastAPI
 from supervisely.app.fastapi import create
-from supervisely.io.fs import mkdir
 from supervisely.sly_logger import logger
 
 app_root_directory = str(Path(__file__).parent.absolute().parents[0])
@@ -36,5 +35,4 @@ PROJECT_META_JSON = api.project.get_meta(PROJECT_ID)
 PROVIDER = os.environ.get("modal.state.provider")
 BUCKET_NAME = os.environ.get("modal.state.bucketName")
 
-STORAGE_DIR = os.path.join(app_root_directory, "src", "debug", "data", "storage_dir")
-mkdir(STORAGE_DIR, True)
+STORAGE_DIR = sly.app.get_data_dir()
