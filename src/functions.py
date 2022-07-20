@@ -8,12 +8,12 @@ import globals as g
 
 
 def upload_image_to_remote_bucket(
-        api: sly.Api,
-        local_project_dir: str,
-        project_name: str,
-        dataset_name: str,
-        image_id: int,
-        image_name: str,
+    api: sly.Api,
+    local_project_dir: str,
+    project_name: str,
+    dataset_name: str,
+    image_id: int,
+    image_name: str,
 ):
     local_img_dir = os.path.join(local_project_dir, dataset_name, "img")
     if not os.path.exists(local_img_dir):
@@ -30,12 +30,12 @@ def upload_image_to_remote_bucket(
 
 
 def upload_ann_to_remote_bucket(
-        api: sly.Api,
-        local_project_dir: str,
-        project_name: str,
-        dataset_name: str,
-        ann_json: dict,
-        image_name: str,
+    api: sly.Api,
+    local_project_dir: str,
+    project_name: str,
+    dataset_name: str,
+    ann_json: dict,
+    image_name: str,
 ):
     local_ann_dir = os.path.join(local_project_dir, dataset_name, "ann")
     if not os.path.exists(local_ann_dir):
@@ -54,7 +54,7 @@ def upload_ann_to_remote_bucket(
 
 
 def upload_project_meta_to_remote_bucket(
-        api: sly.Api, local_project_dir: str, project_name: str, project_meta_json: dict
+    api: sly.Api, local_project_dir: str, project_name: str, project_meta_json: dict
 ):
     if not os.path.exists(local_project_dir):
         mkdir(local_project_dir)
@@ -70,3 +70,10 @@ def upload_project_meta_to_remote_bucket(
         local_path=local_project_meta_json_path,
         remote_path=remote_project_meta_json_path,
     )
+
+
+def shutdown_app():
+    try:
+        sly.app.fastapi.shutdown()
+    except KeyboardInterrupt:
+        sly.logger.info("Application shutdown successfully")
