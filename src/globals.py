@@ -3,8 +3,8 @@ import sys
 from pathlib import Path
 
 import supervisely as sly
-
-from supervisely.app.v1.app_service import AppService
+from fastapi import FastAPI
+from supervisely.app.fastapi import create
 from supervisely.sly_logger import logger
 
 app_root_directory = str(Path(__file__).parent.absolute().parents[0])
@@ -18,7 +18,8 @@ logger.info(f'PYTHONPATH={os.environ.get("PYTHONPATH", "")}')
 # load_dotenv(os.path.join(app_root_directory, "secret_debug.env"))
 # load_dotenv(os.path.join(app_root_directory, "debug.env"))
 
-app = AppService()
+app = FastAPI()
+sly_app = create()
 api = sly.Api.from_env()
 
 TASK_ID = int(os.environ.get("TASK_ID"))
@@ -33,4 +34,4 @@ PROJECT_META_JSON = api.project.get_meta(PROJECT_ID)
 PROVIDER = os.environ.get("modal.state.provider")
 BUCKET_NAME = os.environ.get("modal.state.bucketName")
 
-STORAGE_DIR = app.data_dir
+STORAGE_DIR = sly.app.get_data_dir()
