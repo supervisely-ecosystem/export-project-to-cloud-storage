@@ -3,6 +3,7 @@ import sys
 from pathlib import Path
 
 import supervisely as sly
+
 from supervisely.app.v1.app_service import AppService
 from supervisely.sly_logger import logger
 
@@ -27,6 +28,7 @@ PROJECT_ID = int(os.environ.get("modal.state.slyProjectId"))
 
 PROJECT = api.project.get_info_by_id(PROJECT_ID)
 PROJECT_NAME = PROJECT.name
+PROJECT_META_JSON = api.project.get_meta(PROJECT_ID)
 
 PROVIDER = os.environ.get("modal.state.provider")
 BUCKET_NAME = os.environ.get("modal.state.bucketName")
