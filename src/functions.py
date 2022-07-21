@@ -70,10 +70,3 @@ def upload_project_meta_to_remote_bucket(
         local_path=local_project_meta_json_path,
         remote_path=remote_project_meta_json_path,
     )
-
-
-def shutdown_app():
-    try:
-        sly.app.fastapi.shutdown()
-    except KeyboardInterrupt:
-        sly.logger.info("Application shutdown successfully")
