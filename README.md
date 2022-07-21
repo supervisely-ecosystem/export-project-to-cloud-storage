@@ -1,12 +1,12 @@
 <div align="center" markdown>
-<img src=""/>
+<img src="https://user-images.githubusercontent.com/12828725/180172793-8ae42ac6-76bc-4b5c-bba2-e709dd7ec0c0.png"/>
 
-# Export project to cloud storage
+# Export images project to cloud storage
 
 <p align="center">
   <a href="#Overview">Overview</a> •
-  <a href="#How-To-Run">How To Run</a> •
-  <a href="#How-To-Use">How To Use</a>
+  <a href="#How-To-Use">How To Use</a> •
+  <a href="#Example">Example</a>
 </p>
 
 
@@ -20,13 +20,24 @@
 
 # Overview
 
-This apps allows to export images project to most popular cloud storage providers from Supervisely Private instance.
+This apps allows to export images project with annotations (in [Supervisely format](https://developer.supervise.ly/api-references/supervisely-annotation-json-format)) to the most popular cloud storage providers from Supervisely Private instance.
 
 List of providers:
 - Amazon s3
 - Google Cloud Storage (CS)
 - Microsoft Azure
-
-# How To Run
+- and others with s3 compatible interfaces
 
 # How To Use
+
+0. Ask your instance administrator to add cloud credentials to instance settings. It can be done both in .env 
+   configuration files or in Admin UI dashboard. Learn more in docs: [link1](https://docs.supervise.ly/enterprise-edition/installation/post-installation#configure-your-instance), 
+   [link2](https://docs.supervise.ly/enterprise-edition/advanced-tuning/s3#links-plugin-cloud-providers-support). 
+   In case of any questions or issues, please contact tech support.
+2. Run app from the context menu of project you would like to export
+3. In modal window choose desired cloud provider and define the bucket name (bucket has to be already created)
+4. Press RUN button
+
+# Example
+
+
