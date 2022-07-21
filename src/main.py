@@ -56,4 +56,4 @@ if __name__ == "__main__":
     )
 
     export_project_to_cloud_storage(g.api, g.TASK_ID)
-    f.shutdown_app()
+    sly.app.fastapi.shutdown()
