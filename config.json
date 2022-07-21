@@ -16,12 +16,13 @@
   "task_location": "workspace_tasks",
   "isolate": true,
   "headless": true,
-  "icon": "",
+  "icon": "https://user-images.githubusercontent.com/48913536/180179136-3f8fc48a-9645-4e73-afb6-1984e9a25102.png",
   "icon_background": "#FFFFFF",
   "context_menu": {
     "target": [
       "images_project"
-    ]
+    ],
+    "context_root": "Download as",
   },
   "poster": ""
 }
