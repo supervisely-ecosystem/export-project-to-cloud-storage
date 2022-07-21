@@ -47,8 +47,8 @@ def export_project_to_cloud_storage(api: sly.Api, task_id):
             )
             progress.iter_done_report()
 
-    remote_project_dir = os.path.join(g.PROVIDER, g.BUCKET_NAME, g.PROJECT_NAME)
-    sly.logger.info(f"Project has been successfully exported to {remote_project_dir} ✅")
+    remote_project_dir = api.remote_storage.get_remote_path(g.PROVIDER, g.BUCKET_NAME, g.PROJECT_NAME)
+    sly.logger.info(f"✅Project has been successfully exported to {remote_project_dir}")
 
 
 if __name__ == "__main__":
