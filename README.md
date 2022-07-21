@@ -41,4 +41,7 @@ List of providers:
 
 # Example
 
+Before import bucket is empty:
+
+<img src="https://user-images.githubusercontent.com/12828725/180176958-4b14654b-ba9a-4882-b0e6-3dbfee224035.png"/>
 
