@@ -28,6 +28,8 @@ List of providers:
 - Microsoft Azure
 - and others with s3 compatible interfaces
 
+✅ For developers: you can use the sources of this app as a starting point for your custom export to cloud. 
+
 # How To Use
 
 0. Ask your instance administrator to add cloud credentials to instance settings. It can be done both in .env 
