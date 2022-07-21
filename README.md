@@ -78,3 +78,6 @@ Before import bucket is empty:
 
 <img src="https://user-images.githubusercontent.com/12828725/180176958-4b14654b-ba9a-4882-b0e6-3dbfee224035.png"/>
 
+After import the project data (images and annotations) is in bucket:
+
+https://user-images.githubusercontent.com/12828725/180199053-5571ecf1-e26c-479e-836d-1d5ef0084873.mp4
