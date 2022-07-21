@@ -3,6 +3,7 @@ import sys
 from pathlib import Path
 
 import supervisely as sly
+
 from fastapi import FastAPI
 from supervisely.app.fastapi import create
 from supervisely.sly_logger import logger
@@ -33,5 +34,7 @@ PROJECT_META_JSON = api.project.get_meta(PROJECT_ID)
 
 PROVIDER = os.environ.get("modal.state.provider")
 BUCKET_NAME = os.environ.get("modal.state.bucketName")
+if BUCKET_NAME == "" or BUCKET_NAME is None:
+    raise ValueError("Bucket name is undefined")
 
 STORAGE_DIR = sly.app.get_data_dir()

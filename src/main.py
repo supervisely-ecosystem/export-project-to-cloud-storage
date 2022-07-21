@@ -9,9 +9,13 @@ import globals as g
 @sly.timeit
 def export_project_to_cloud_storage(api: sly.Api, task_id):
     local_project_dir = os.path.join(g.STORAGE_DIR, g.PROJECT_NAME)
+    g.PROJECT_NAME = f.validate_remote_storage_path(
+        api=api, project_name=g.PROJECT_NAME
+    )
     f.upload_project_meta_to_remote_bucket(
         api, local_project_dir, g.PROJECT_NAME, g.PROJECT_META_JSON
     )
+
     datasets = list(api.dataset.get_list(g.PROJECT_ID))
     for dataset in datasets:
         images_infos = api.image.get_list(dataset.id)
@@ -42,6 +46,9 @@ def export_project_to_cloud_storage(api: sly.Api, task_id):
                 image_name=image_name,
             )
             progress.iter_done_report()
+
+    remote_project_dir = os.path.join(g.PROVIDER, g.BUCKET_NAME, g.PROJECT_NAME)
+    sly.logger.info(f"Project has been successfully exported to {remote_project_dir} ✅")
 
 
 if __name__ == "__main__":
