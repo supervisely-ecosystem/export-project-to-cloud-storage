@@ -3,14 +3,14 @@
   "type": "app",
   "categories": [
     "export",
-    "cloud"
+    "images"
   ],
-  "description": "Export project to cloud (Google Cloud Storage, Amazon S3, Microsoft Azure, ...)",
+  "description": "Export project to Google Cloud Storage, Amazon S3, Microsoft Azure, ...",
   "docker_image": "supervisely/base-py-sdk:6.37.1",
   "main_script": "src/main.py",
   "modal_template": "src/modal.html",
   "modal_template_state": {
-    "provider": "google",
+    "provider": "s3",
     "bucketName": ""
   },
   "task_location": "workspace_tasks",
