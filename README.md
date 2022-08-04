@@ -14,8 +14,8 @@
 [![](https://img.shields.io/badge/supervisely-ecosystem-brightgreen)](https://ecosystem.supervise.ly/apps/supervisely-ecosystem/export-project-to-cloud-storage)
 [![](https://img.shields.io/badge/slack-chat-green.svg?logo=slack)](https://supervise.ly/slack)
 ![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/supervisely-ecosystem/export-project-to-cloud-storage)
-[![views](https://app.supervise.ly/img/badges/views/supervisely-ecosystem/export-project-to-cloud-storage)](https://supervise.ly)
-[![runs](https://app.supervise.ly/img/badges/runs/supervisely-ecosystem/export-project-to-cloud-storage)](https://supervise.ly)
+[![views](https://app.supervise.ly/img/badges/views/supervisely-ecosystem/export-project-to-cloud-storage.png)](https://supervise.ly)
+[![runs](https://app.supervise.ly/img/badges/runs/supervisely-ecosystem/export-project-to-cloud-storage.png)](https://supervise.ly)
 
 </div>
 
