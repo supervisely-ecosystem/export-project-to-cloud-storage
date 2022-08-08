@@ -1,5 +1,5 @@
 <div align="center" markdown>
-<img src="https://user-images.githubusercontent.com/12828725/180172793-8ae42ac6-76bc-4b5c-bba2-e709dd7ec0c0.png"/>
+<img src="https://user-images.githubusercontent.com/106374579/183424972-011d8a6e-1f07-4c34-8ca1-4eff27d71438.png"/>
 
 # Export images project to cloud storage
 
