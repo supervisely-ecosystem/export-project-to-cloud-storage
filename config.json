@@ -3,10 +3,11 @@
   "type": "app",
   "categories": [
     "export",
-    "images"
+    "images",
+    "videos"
   ],
   "description": "Export project to Google Cloud Storage, Amazon S3, Microsoft Azure, ...",
-  "docker_image": "supervisely/import-export:6.73.162",
+  "docker_image": "supervisely/import-export:6.73.256",
   "main_script": "src/main.py",
   "modal_template": "src/modal.html",
   "modal_template_state": {
@@ -25,5 +26,5 @@
     "context_root": "Download as"
   },
   "poster": "https://user-images.githubusercontent.com/106374579/183424972-011d8a6e-1f07-4c34-8ca1-4eff27d71438.png",
-  "min_instance_version": "6.11.8"
+  "min_instance_version": "6.12.12"
 }
