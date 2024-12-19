@@ -1,54 +1,55 @@
-import os
+import asyncio
+from pathlib import Path
 
 import supervisely as sly
 
 import functions as f
-import globals as g
+import sly_globals as g
 
 
 @sly.timeit
-def export_project_to_cloud_storage(api: sly.Api, task_id):
-    local_project_dir = os.path.join(g.STORAGE_DIR, g.PROJECT_NAME)
-    g.PROJECT_NAME = f.validate_remote_storage_path(
-        api=api, project_name=g.PROJECT_NAME
-    )
-    f.upload_project_meta_to_remote_bucket(
-        api, local_project_dir, g.PROJECT_NAME, g.PROJECT_META_JSON
-    )
+def export_project_to_cloud_storage(api: sly.Api):
+    project_info = api.project.get_info_by_id(g.PROJECT_ID)
+    batch_size = 50 if project_info.type == sly.ProjectType.IMAGES.value else 10
+    if project_info is None:
+        raise ValueError(f"Project with ID={g.PROJECT_ID} not found")
 
-    datasets = list(api.dataset.get_list(g.PROJECT_ID))
-    for dataset in datasets:
-        images_infos = api.image.get_list(dataset.id)
-        images_ids = [image_info.id for image_info in images_infos]
-        images_names = [image_info.name for image_info in images_infos]
+    local_dir = str(Path(sly.app.get_data_dir()) / project_info.name)
 
-        anns_infos = api.annotation.download_batch(dataset.id, images_ids)
-        ann_jsons = [ann_info.annotation for ann_info in anns_infos]
+    project_type_to_cls = {
+        sly.ProjectType.IMAGES.value: sly.Project,
+        sly.ProjectType.VIDEOS.value: sly.VideoProject,
+    }
+    project_type_cls = project_type_to_cls.get(project_info.type)
+    if project_type_cls is None:
+        raise ValueError(f"Exporting project type {project_info.type} is not supported yet")
 
-        progress = sly.Progress(
-            message=f"Uploading images from {dataset.name}", total_cnt=len(images_ids)
-        )
-        for image_id, image_name, ann_json in zip(images_ids, images_names, ann_jsons):
-            f.upload_image_to_remote_bucket(
-                api=api,
-                local_project_dir=local_project_dir,
-                project_name=g.PROJECT_NAME,
-                dataset_name=dataset.name,
-                image_id=image_id,
-                image_name=image_name,
+    if not sly.fs.dir_exists(local_dir):
+        with sly.tqdm_sly(total=project_info.items_count, desc="Downloading project") as p:
+            loop = sly.utils.get_or_create_event_loop()
+            coroutine = project_type_cls.download_async(
+                api, g.PROJECT_ID, local_dir, progress_cb=p.update
             )
-            f.upload_ann_to_remote_bucket(
-                api=api,
-                local_project_dir=local_project_dir,
-                project_name=g.PROJECT_NAME,
-                dataset_name=dataset.name,
-                ann_json=ann_json,
-                image_name=image_name,
-            )
-            progress.iter_done_report()
+            if loop.is_running():
+                future = asyncio.run_coroutine_threadsafe(coroutine, loop)
+                future.result()
+            else:
+                loop.run_until_complete(coroutine)
 
-    remote_project_dir = api.remote_storage.get_remote_path(g.PROVIDER, g.BUCKET_NAME, g.PROJECT_NAME)
-    sly.logger.info(f"✅Project has been successfully exported to {remote_project_dir}")
+    dir_size = sly.fs.get_directory_size(local_dir)
+    project_name = f.validate_remote_storage_path(api=api, project_name=project_info.name)
+    remote_path: str = api.remote_storage.get_remote_path(g.PROVIDER, g.BUCKET, project_name)
+    with sly.tqdm_sly(total=dir_size, desc="Uploading project", unit="B", unit_scale=True) as pbar:
+        local_files = sly.fs.list_files_recursively(local_dir)
+        remote_files = [f"{remote_path}/{str(Path(f).relative_to(local_dir))}" for f in local_files]
+
+        for local, remote in zip(
+            sly.batched(local_files, batch_size=batch_size),
+            sly.batched(remote_files, batch_size=batch_size),
+        ):
+            api.storage.upload_bulk(g.TEAM_ID, local, remote, pbar)
+
+    sly.logger.info(f"✅ Project has been successfully exported to {remote_path}")
 
 
 if __name__ == "__main__":
@@ -62,5 +63,4 @@ if __name__ == "__main__":
         },
     )
 
-    export_project_to_cloud_storage(g.api, g.TASK_ID)
-    sly.app.fastapi.shutdown()
+    sly.main_wrapper("main", export_project_to_cloud_storage, api=g.api)
