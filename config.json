@@ -1,31 +1,24 @@
 {
-  "name": "Export project to cloud storage",
-  "type": "app",
-  "categories": [
-    "export",
-    "images",
-    "videos"
-  ],
-  "description": "Export project to Google Cloud Storage, Amazon S3, Microsoft Azure, ...",
-  "docker_image": "supervisely/import-export:6.73.256",
-  "main_script": "src/main.py",
-  "modal_template": "src/modal.html",
-  "modal_template_state": {
-    "provider": "s3",
-    "bucketName": ""
-  },
-  "task_location": "workspace_tasks",
-  "isolate": true,
-  "headless": true,
-  "icon": "https://user-images.githubusercontent.com/48913536/180179136-3f8fc48a-9645-4e73-afb6-1984e9a25102.png",
-  "icon_background": "#FFFFFF",
-  "context_menu": {
-    "target": [
-      "images_project",
-      "videos_project"
-    ],
-    "context_root": "Download as"
-  },
-  "poster": "https://github.com/supervisely-ecosystem/export-project-to-cloud-storage/releases/download/v1.0.6/poster.png",
-  "min_instance_version": "6.12.12"
+	"name": "Export project to cloud storage",
+	"type": "app",
+	"categories": ["export", "images", "videos"],
+	"description": "Export project to Google Cloud Storage, Amazon S3, Microsoft Azure, ...",
+	"docker_image": "supervisely/import-export:6.73.274",
+	"min_instance_version": "6.12.17",
+	"main_script": "src/main.py",
+	"modal_template": "src/modal.html",
+	"modal_template_state": {
+		"provider": "s3",
+		"bucketName": ""
+	},
+	"task_location": "workspace_tasks",
+	"isolate": true,
+	"headless": true,
+	"icon": "https://user-images.githubusercontent.com/48913536/180179136-3f8fc48a-9645-4e73-afb6-1984e9a25102.png",
+	"icon_background": "#FFFFFF",
+	"context_menu": {
+		"target": ["images_project", "videos_project"],
+		"context_root": "Download as"
+	},
+	"poster": "https://github.com/supervisely-ecosystem/export-project-to-cloud-storage/releases/download/v1.0.6/poster.png"
 }
