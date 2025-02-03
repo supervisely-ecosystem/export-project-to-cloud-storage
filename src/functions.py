@@ -7,7 +7,7 @@ import sly_globals as g
 
 def validate_remote_storage_path(api: sly.Api, project_name):
     remote_path = api.remote_storage.get_remote_path(
-        provider=g.PROVIDER, bucket=g.BUCKET, path_in_bucket="", team_id=g.TEAM_ID
+        provider=g.PROVIDER, bucket=g.BUCKET, path_in_bucket=""
     )
     remote_paths = api.storage.list(
         g.TEAM_ID,
