@@ -47,10 +47,6 @@ def export_project_to_cloud_storage(api: sly.Api):
             sly.batched(local_files, batch_size=batch_size),
             sly.batched(remote_files, batch_size=batch_size),
         ):
-            for l, r in zip(local, remote):
-                print(f"{l=}")
-                print(f"{r=}")
-                print("-" * 100)
             api.storage.upload_bulk(g.TEAM_ID, local, remote, pbar)
 
     sly.logger.info(f"✅ Project has been successfully exported to {remote_path}")
