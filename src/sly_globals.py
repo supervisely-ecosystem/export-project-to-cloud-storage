@@ -2,11 +2,25 @@ import os
 
 import supervisely as sly
 from dotenv import load_dotenv
-from functions import validate_bucket_name
 
 if sly.is_development():
     load_dotenv("local.env")
     load_dotenv(os.path.expanduser("~/supervisely.env"))
+
+
+def validate_bucket_name(bucket_name):
+    import re
+
+    if bucket_name == "" or bucket_name is None:
+        raise ValueError("Bucket name is undefined")
+
+    # Regex: one or more non-slash, single slash, one or more non-slash, nothing else
+    pattern = r'^[^/]+/[^/]+$'
+    if not re.match(pattern, bucket_name):
+        raise ValueError(
+            "Bucket name must be in the format 'bucket/folder', with no leading, trailing, or consecutive slashes"
+        )
+    return bucket_name
 
 api = sly.Api.from_env()
 

@@ -25,17 +25,3 @@ def validate_remote_storage_path(api: sly.Api, project_name):
             f"project has been renamed to {res_project_name}"
         )
     return res_project_name
-
-def validate_bucket_name(bucket_name):
-    import re
-
-    if bucket_name == "" or bucket_name is None:
-        raise ValueError("Bucket name is undefined")
-
-    # Regex: one or more non-slash, single slash, one or more non-slash, nothing else
-    pattern = r'^[^/]+/[^/]+$'
-    if not re.match(pattern, bucket_name):
-        raise ValueError(
-            "Bucket name must be in the format 'bucket/folder', with no leading, trailing, or consecutive slashes"
-        )
-    return bucket_name
