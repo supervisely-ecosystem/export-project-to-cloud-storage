@@ -14,11 +14,11 @@ def validate_bucket_name(bucket_name):
     if bucket_name == "" or bucket_name is None:
         raise ValueError("Bucket name is undefined")
 
-    # Regex: one or more non-slash, single slash, one or more non-slash, nothing else
-    pattern = r'^[^/]+/[^/]+$'
+    # Regex: one or more non-slash, then (slash and one or more non-slash) repeated, no leading/trailing/consecutive slashes
+    pattern = r'^[^/]+(?:/[^/]+)+$'
     if not re.match(pattern, bucket_name):
         raise ValueError(
-            "Bucket name must be in the format 'bucket/folder', with no leading, trailing, or consecutive slashes"
+            "Bucket name must be in the format 'bucket/folder' or 'bucket/folder/subfolder', with no leading, trailing, or consecutive slashes"
         )
     return bucket_name
 
