@@ -2,6 +2,7 @@ import os
 
 import supervisely as sly
 from dotenv import load_dotenv
+from functions import validate_bucket_name
 
 if sly.is_development():
     load_dotenv("local.env")
@@ -15,9 +16,8 @@ WORKSPACE_ID = sly.env.workspace_id()
 PROJECT_ID = sly.env.project_id()
 
 PROVIDER = os.environ.get("modal.state.provider")
-BUCKET = os.environ.get("modal.state.bucketName")
-if BUCKET == "" or BUCKET is None:
-    raise ValueError("Bucket name is undefined")
+BUCKET = validate_bucket_name(os.environ.get("modal.state.bucketName"))
+
 
 STORAGE_DIR = sly.app.get_data_dir()
 STORAGE_DIR = sly.app.get_data_dir()
