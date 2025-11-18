@@ -41,7 +41,8 @@ def export_project_to_cloud_storage(api: sly.Api):
     remote_path: str = api.remote_storage.get_remote_path(g.PROVIDER, g.BUCKET, project_name)
     with sly.tqdm_sly(total=dir_size, desc="Uploading project", unit="B", unit_scale=True) as pbar:
         local_files = sly.fs.list_files_recursively(local_dir)
-        remote_files = [f"{remote_path}/{str(Path(f).relative_to(local_dir))}" for f in local_files]
+        rel_paths = [str(Path(f).relative_to(local_dir)) for f in local_files]
+        remote_files = [f"{remote_path}/{f.clean_remote_path(rel_path)}" for rel_path in rel_paths]
 
         for local, remote in zip(
             sly.batched(local_files, batch_size=batch_size),
