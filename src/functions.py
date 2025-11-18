@@ -7,8 +7,11 @@ import sly_globals as g
 
 def validate_remote_storage_path(api: sly.Api, project_name):
     safe_name = clean_remote_path(project_name)
+    parent_path = Path(safe_name).parent
+    if parent_path == Path("."):
+        parent_path = ""
     remote_path = api.remote_storage.get_remote_path(
-        provider=g.PROVIDER, bucket=g.BUCKET, path_in_bucket=""
+        provider=g.PROVIDER, bucket=g.BUCKET, path_in_bucket=str(parent_path)
     )
     remote_paths = api.storage.list(
         g.TEAM_ID,
