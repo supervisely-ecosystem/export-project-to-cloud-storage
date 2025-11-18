@@ -24,10 +24,7 @@ def validate_remote_storage_path(api: sly.Api, project_name):
     res_project_name = sly.generate_free_name(used_names=remote_folders, possible_name=safe_name)
 
     if res_project_name != project_name:
-        sly.logger.warning(
-            f"Project with name: {project_name} already exists in bucket, "
-            f"project has been renamed to {res_project_name}"
-        )
+        sly.logger.info(f"Project has been renamed to {res_project_name}")
     return res_project_name
 
 
