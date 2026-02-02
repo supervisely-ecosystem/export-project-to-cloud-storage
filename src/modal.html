@@ -2,15 +2,29 @@
     <div>
         <sly-field title="Provider">
             <el-select v-model="state.provider" placeholder="Select cloud provider">
-                <el-option key="google" label="google cloud storage" value="google"></el-option>
-                <el-option key="amazon" label="amazon s3" value="s3"></el-option>
-                <el-option key="azure" label="azure storage" value="azure"></el-option>
+                <el-option key="google" label="Google Cloud Storage" value="google"></el-option>
+                <el-option key="amazon" label="Amazon S3" value="s3"></el-option>
+                <el-option key="azure" label="Azure Storage" value="azure"></el-option>
             </el-select>
         </sly-field>
     </div>
     <div>
-        <sly-field title="Bucket name" description="Export to <bucket name>/<project path>">
+        <sly-field title="Bucket Name" description="Export to <bucket name>/<project path>">
             <el-input v-model="state.bucketName"></el-input>
+        </sly-field>
+    </div>
+    <div>
+        <sly-field title="Export Options for Image Project:"
+            description="In this section, configure export options such as exporting annotations only, and choose whether to include info files.">
+            <div style="display: flex; flex-direction: column; gap: 8px;margin-left: 10px">
+                <el-checkbox v-model="state.annotationsOnly" style="margin-left: 0px">Annotations Only</el-checkbox>
+                <div style="display: flex; flex-direction: column;">
+                    <el-checkbox v-model="state.includeInfo" style="margin-left: 0px">Include Info Files</el-checkbox>
+                    <sly-field style="margin: 0px 0px 0px 6px" description="↑ Info files contain paths to media files and are useful when exporting only annotations, 
+          if the media files are already stored in the cloud and linked to the project."></sly-field>
+                </div>
+                <el-checkbox v-model="state.excludeReadme" style="gap: 0px">Exclude Project README.md</el-checkbox>
+            </div>
         </sly-field>
     </div>
 </div>

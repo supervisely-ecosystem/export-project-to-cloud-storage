@@ -24,8 +24,17 @@ def export_project_to_cloud_storage(api: sly.Api):
 
     if not sly.fs.dir_exists(local_dir):
         with sly.tqdm_sly(total=project_info.items_count, desc="Downloading project") as p:
-            sly.download_fast(api=api, project_id=g.PROJECT_ID, dest_dir=local_dir, progress_cb=p.update)
-
+            sly.download_fast(
+                api=api, 
+                project_id=g.PROJECT_ID, 
+                dest_dir=local_dir, 
+                progress_cb=p.update, 
+                save_images=False, 
+                project_info=project_info,
+                save_images=g.DOWNLOAD_IMAGES,
+                save_image_info=g.INCLUDE_INFO,
+                skip_create_readme=g.EXCLUDE_README,
+            )
     dir_size = sly.fs.get_directory_size(local_dir)
     project_name = f.validate_remote_storage_path(api=api, project_name=project_info.name)
     remote_path: str = api.remote_storage.get_remote_path(g.PROVIDER, g.BUCKET, project_name)
@@ -50,7 +59,12 @@ if __name__ == "__main__":
             "task_id": g.TASK_ID,
             "team_id": g.TEAM_ID,
             "workspace_id": g.WORKSPACE_ID,
-            "modal.state.slyProjectId": g.PROJECT_ID,
+            "project_id": g.PROJECT_ID,
+            "provider": g.PROVIDER,
+            "bucket_name": g.BUCKET,
+            "annotations_only": g.ONLY_ANNOTATIONS,
+            "include_info": g.INCLUDE_INFO,
+            "exclude_readme": g.EXCLUDE_README,
         },
     )
 
