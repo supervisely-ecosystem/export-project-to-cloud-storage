@@ -1,10 +1,8 @@
-import asyncio
 from pathlib import Path
-
-import supervisely as sly
 
 import functions as f
 import sly_globals as g
+import supervisely as sly
 
 
 @sly.timeit
@@ -26,15 +24,7 @@ def export_project_to_cloud_storage(api: sly.Api):
 
     if not sly.fs.dir_exists(local_dir):
         with sly.tqdm_sly(total=project_info.items_count, desc="Downloading project") as p:
-            loop = sly.utils.get_or_create_event_loop()
-            coroutine = project_type_cls.download_async(
-                api, g.PROJECT_ID, local_dir, progress_cb=p.update
-            )
-            if loop.is_running():
-                future = asyncio.run_coroutine_threadsafe(coroutine, loop)
-                future.result()
-            else:
-                loop.run_until_complete(coroutine)
+            sly.download_fast(api=api, project_id=g.PROJECT_ID, dest_dir=local_dir, progress_cb=p.update)
 
     dir_size = sly.fs.get_directory_size(local_dir)
     project_name = f.validate_remote_storage_path(api=api, project_name=project_info.name)
