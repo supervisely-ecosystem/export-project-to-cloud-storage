@@ -1,2 +1,0 @@
-# supervisely==6.73.518
-git+https://github.com/supervisely/supervisely.git@pylint-updates
