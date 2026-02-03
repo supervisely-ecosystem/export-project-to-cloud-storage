@@ -33,10 +33,10 @@ List of providers:
 
 **Release notes:**
 
-- 🚀 **v1.1.7** - added additional export options for Image projects:
+- 🚀 **v1.1.7** - added additional export options:
   - Annotations Only
   - Include Info files (Info files contain paths to media files and are useful when exporting only annotations, if the media files are already stored in the cloud and linked to the project)
-  - Exclude Project README.md
+  - Exclude Project README.md (Image Project)
 
 - **v1.0.6** - added support for video projects
 

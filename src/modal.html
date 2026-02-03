@@ -14,7 +14,7 @@
         </sly-field>
     </div>
     <div>
-        <sly-field title="Export Options for Image Project:"
+        <sly-field title="Export Options:"
             description="In this section, configure export options such as exporting annotations only, and choose whether to include info files.">
             <div style="display: flex; flex-direction: column; gap: 8px;margin-left: 10px">
                 <el-checkbox v-model="state.annotationsOnly" style="margin-left: 0px">Annotations Only</el-checkbox>
@@ -23,7 +23,8 @@
                     <sly-field style="margin: 0px 0px 0px 6px" description="↑ Info files contain paths to media files and are useful when exporting only annotations, 
           if the media files are already stored in the cloud and linked to the project."></sly-field>
                 </div>
-                <el-checkbox v-model="state.excludeReadme" style="gap: 0px">Exclude Project README.md</el-checkbox>
+                <el-checkbox v-model="state.excludeReadme" style="gap: 0px">Exclude Project README.md (Image
+                    Project)</el-checkbox>
             </div>
         </sly-field>
     </div>

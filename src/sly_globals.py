@@ -33,7 +33,7 @@ PROJECT_ID = sly.env.project_id()
 PROVIDER = os.environ.get("modal.state.provider")
 BUCKET = validate_bucket_name(os.environ.get("modal.state.bucketName"))
 ONLY_ANNOTATIONS = bool(strtobool(os.environ.get("modal.state.annotationsOnly")))
-DOWNLOAD_IMAGES = not ONLY_ANNOTATIONS
+DOWNLOAD_MEDIA = not ONLY_ANNOTATIONS
 INCLUDE_INFO = bool(strtobool(os.environ.get("modal.state.includeInfo")))
 EXCLUDE_README = bool(strtobool(os.environ.get("modal.state.excludeReadme")))
 

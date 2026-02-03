@@ -30,8 +30,10 @@ def export_project_to_cloud_storage(api: sly.Api):
                 dest_dir=local_dir, 
                 progress_cb=p.update,
                 project_info=project_info,
-                save_images=g.DOWNLOAD_IMAGES,
+                save_images=g.DOWNLOAD_MEDIA,
+                download_videos=g.DOWNLOAD_MEDIA,
                 save_image_info=g.INCLUDE_INFO,
+                save_video_info=g.INCLUDE_INFO,
                 skip_create_readme=g.EXCLUDE_README,
             )
     dir_size = sly.fs.get_directory_size(local_dir)
@@ -61,9 +63,9 @@ if __name__ == "__main__":
             "project_id": g.PROJECT_ID,
             "provider": g.PROVIDER,
             "bucket_name": g.BUCKET,
-            "annotations_only": g.ONLY_ANNOTATIONS,
-            "include_info": g.INCLUDE_INFO,
-            "exclude_readme": g.EXCLUDE_README,
+            "annotations_only": f"{g.ONLY_ANNOTATIONS}",
+            "include_info": f"{g.INCLUDE_INFO}",
+            "exclude_readme": f"{g.EXCLUDE_README}",
         },
     )
 
