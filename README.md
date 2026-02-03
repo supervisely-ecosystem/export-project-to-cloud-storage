@@ -20,7 +20,7 @@
 
 # Overview
 
-This apps allows to export images/videos project with annotations (in [Supervisely format](https://developer.supervisely.com/api-references/supervisely-annotation-json-format)) to the most popular cloud storage providers from Supervisely Private instance.
+This app allows exporting images/videos project with annotations (in [Supervisely format](https://developer.supervisely.com/api-references/supervisely-annotation-json-format)) to the most popular cloud storage providers from Supervisely Private instance.
 
 List of providers:
 
@@ -32,6 +32,11 @@ List of providers:
 ✅ For developers: you can use the sources of this app as a starting point for your custom export to cloud.
 
 **Release notes:**
+
+- 🚀 **v1.1.7** - added additional export options for Image projects:
+  - Annotations Only
+  - Include Info files (Info files contain paths to media files and are useful when exporting only annotations, if the media files are already stored in the cloud and linked to the project)
+  - Exclude Project README.md
 
 - **v1.0.6** - added support for video projects
 
@@ -53,7 +58,7 @@ List of providers:
 
 ## Run from Images Project
 
-**Step 1.** Run the application from the context menu of the Images or Videos Project 
+**Step 1.** Run the application from the context menu of the Images or Videos Project
 
 <div align="center" markdown>
 <img src="https://user-images.githubusercontent.com/48913536/180185139-67c41ae9-360d-4dd9-950b-ee8baae7de24.png">  
