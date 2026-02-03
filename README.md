@@ -34,10 +34,11 @@ List of providers:
 **Release notes:**
 
 - 🚀 **v1.1.7** - added additional export options:
-  - Annotations Only
-  - Include Info files (Info files contain paths to media files and are useful when exporting only annotations, if the media files are already stored in the cloud and linked to the project)
-  - Exclude Project README.md (Image Project)
-
+  - Annotations only
+  - Include Info files
+  - Exclude README.md (Image Project)
+    <br><br>🗂️ Info files contain paths to media files and are useful when exporting only annotations, if the media files are already stored in the cloud and linked to the project.
+    <br>💡 For video projects, even if only annotations are selected, a folder with videos will still be created, occupying 0 bytes. This is technically necessary for the application to function correctly.
 - **v1.0.6** - added support for video projects
 
 # How To Run
